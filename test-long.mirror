@@ -1,0 +1,46 @@
+signature foo(x: number, y: number) -> number
+example foo(10, 3) = 101010
+example foo(1, 1) = 1
+example foo(0, 10) = 0
+
+signature bar(x: number) -> string
+example bar(9) = "length of '9' is 1"
+example bar(3210) = "length of '3210' is 4"
+
+signature baz(x: list[string]) -> string
+example baz("a", "b") = "a,\nb"
+example baz(["a", "b"]) = "a,\nb"
+example baz("a", 1) = "a,\n1"
+
+signature list(x: string) -> list[string]
+signature list(x: string, x:string) -> list[string]
+example list("a") = ["a"]
+example list("a", "b") = ["a", "b"]
+example list("a", "b", "c") = ["a", "b", "c"]
+
+signature lz(x: number) -> number
+example lz(123) = 0
+
+signature ls(x: number) -> number
+example ls("${lz(0)}") = 1
+example ls(4) = 5
+example ls(123) = 124
+
+signature lpl(m: number, n: number) -> number
+example lpl(2, 3) = 5
+
+signature append(x: list[number], y: list[number]) -> list[number]
+example append([1, 2], [3, 4]) = [1, 2, 3, 4]
+
+baz(list(
+  bar(foo(123, 3)),
+  baz(list("ab", "c", "d", "e")),
+  bar(foo(10, 3)),
+  ls(lz(0)),
+  ls(1),
+  string(ls(2)),
+  ls(ls(ls(ls(0)))),
+  ls(4),
+  lpl(4, 2),
+  append(append([1, 2, 3], [6520]), [5, 6])
+  ))
