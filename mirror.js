@@ -3,6 +3,7 @@
 // Compiler/LLM wrapper.
 class MirrorCompiler {
     async callOpenAI(apiKey, prompt) {
+        console.debug("USER: " + prompt);
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -11,6 +12,8 @@ class MirrorCompiler {
             },
             body: JSON.stringify({
                 model: "gpt-4o",
+                // logprobs: true,
+                // top_logprobs: 10,
                 messages: [{ role: "user", content: prompt }]
             })
         });
@@ -19,6 +22,7 @@ class MirrorCompiler {
         if (!response.ok) {
             throw new Error(data.error?.message || "Unknown error");
         }
+        console.debug("AI: " + data.choices[0].message.content);
         return data.choices[0].message.content;
     }
 }
