@@ -123,7 +123,7 @@ class MirrorParser {
         } else if (this.matchString()) {
             return this.previous();
         } else if (this.match('[')) {
-            const literal = this.parseLiteral();
+            const literal = this.parseLiterals();
             this.consume(']');
             return { type: 'list', value: literal };
         } else if (this.match('{')) {

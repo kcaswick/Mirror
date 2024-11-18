@@ -190,6 +190,9 @@ bar(foo(123, 3))`;
 
     // Run button action.
     document.getElementById("button-run").addEventListener("click", async function() {
+        // Clear old output to avoid confusion.
+        document.getElementById("output").textContent = "Running...";
+        document.getElementById("status").textContent = "Status: Executing...";
         let jscode = editor2.getValue();
         document.getElementById("output").textContent = eval(jscode);
         document.getElementById("status").textContent = "Status: Executed successfully!";
